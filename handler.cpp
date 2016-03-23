@@ -865,7 +865,7 @@ bool PhantomJSHandler::OnQuery(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame
           keyEvent.type = KEYEVENT_CHAR;
         }
         keyEvent.windows_key_code = arg1.toInt();
-        keyEvent.native_key_code = vkToNative(keyEvent.native_key_code);
+        keyEvent.native_key_code = vkToNative(keyEvent.windows_key_code);
         keyEvent.character = arg1.toInt();
         if (keyEvent.type != KEYEVENT_CHAR) {
           subBrowser->GetHost()->SendKeyEvent(keyEvent);
