@@ -846,8 +846,9 @@ bool PhantomJSHandler::OnQuery(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame
       if (arg1.isString()) {
         foreach (auto c, arg1.toString()) {
           keyEvent.character = c.unicode();
-          keyEvent.windows_key_code = c.unicode();
-          keyEvent.native_key_code = c.unicode();
+          // use uppercase chars where possible, required for ASCII letters
+          keyEvent.windows_key_code = c.toUpper().unicode();
+          keyEvent.native_key_code = c.toUpper().unicode();
           keyEvent.type = KEYEVENT_KEYDOWN;
           subBrowser->GetHost()->SendKeyEvent(keyEvent);
           keyEvent.type = KEYEVENT_CHAR;
